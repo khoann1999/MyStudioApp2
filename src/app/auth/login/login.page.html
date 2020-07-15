@@ -1,6 +1,5 @@
 <ion-content padding>
-  {{isLoggedIn()}}
-  <form #form="ngForm" (ngSubmit)="login(form)">
+  <form [formGroup]="userForm" (ngSubmit)="login()">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -8,18 +7,21 @@
             <h3>Đăng nhập</h3>
           </div>
           <div padding>
+            <h3>Tên tài khoản</h3>
             <ion-item>
-              <ion-input name="username" type="text" placeholder="Tài khoản" ngModel required></ion-input>
+              <ion-input formControlName="userName" name="userName" type="text" placeholder="Nhập tài khoản"  required></ion-input>
             </ion-item>
+            <h3>Mật Khẩu</h3>
             <ion-item>
-              <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+              <ion-input formControlName="password" name="password" type="password" required></ion-input>
             </ion-item>
           </div>
           <div padding>
-            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Đăng nhập</ion-button>
+            <ion-button size="large" type="submit">Đăng nhập</ion-button>
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
   </form>
 </ion-content>
+{{isLoggedIn()}}

@@ -127,6 +127,6 @@ export class AppComponent implements OnInit {
   }
   public logOut() {
     this.loginService.logout();
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('login').then();
   }
 }

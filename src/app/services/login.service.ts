@@ -11,13 +11,8 @@ export class LoginService {
             return this.user;
     }
 
-    public login(form) {
-        const user = {
-            userName: form.value.username,
-            password: form.value.password,
-            role: null
-        };
-        this.http.post<User>(this.apiUrl + 'Accounts/Login', user).subscribe(result => {
+    public login(account: User) {
+        this.http.post<User>(this.apiUrl + 'Accounts/Login', account).subscribe(result => {
             this.user = result;
           }, error => {
               console.error(error);
