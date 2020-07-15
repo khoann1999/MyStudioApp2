@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button [text]="getBackButtonText()" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" >
+
+
+  <ion-content padding >
+    <form [formGroup]="actorForm"  (ngSubmit)="createActor()">
+      <ion-grid>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div text-center>
+              <h1>Thông tin diễn viên</h1>
+            </div>
+            <div padding>
+              <h3>Tên tài khoản</h3>
+              <ion-item>
+                <ion-input formControlName="userName" name="userName" type="text" placeholder="Nhập tài khoản"  required></ion-input>
+              </ion-item>
+              <h3>Mật Khẩu</h3>
+              <ion-item>
+                <ion-input formControlName="password" name="password" type="password" required></ion-input>
+              </ion-item>
+              <h3>Tên diễn viên</h3>
+              <ion-item>
+                <ion-input formControlName="fullName" name="fullName" type="text" placeholder="Nhập họ tên"  required></ion-input>
+              </ion-item>
+              <h3>Ảnh</h3>
+              <ion-item>
+                <ion-input formControlName="image" name="image" type="text" placeholder="image"  required></ion-input>
+              </ion-item>
+              <h3>Mô tả</h3>
+              <ion-item>
+                <ion-input formControlName="description" name="description" type="text" placeholder="Nhập miêu tả"  required></ion-input>
+              </ion-item>
+              <h3>Số điện thoại</h3>
+              <ion-item>
+                <ion-input formControlName="phoneNumber" name="phoneNumber" type="number"  required></ion-input>
+              </ion-item>
+              <h3>Email</h3>
+              <ion-item>
+                <ion-input formControlName="email" name="email" type="email" placeholder="emailcuaban@email.com"  required></ion-input>
+              </ion-item>
+            </div>
+            <div padding>
+              <ion-button size="large" type="submit" [disabled]="actorForm.invalid" expand="block">submit</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-content>
+
+</ion-content>

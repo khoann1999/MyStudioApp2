@@ -1,0 +1,17 @@
+<ion-item *ngIf="actor" [routerLink]="'/actors/' + actor.userName" [detail]="false">
+  <ion-label class="ion-text-wrap">
+    <h2>
+      Tên tài khoản:
+      {{ actor.userName }}
+      <span class="date">
+        <ion-note>Phone number {{ actor.phoneNumber }}</ion-note>
+        <ion-icon name="chevron-forward" size="small" *ngIf="isIos()"></ion-icon>
+      </span>
+    </h2>
+    <h3>Tên {{ actor.fullName }}</h3>
+    <h4>Miêu tả:</h4>
+    <p>
+      {{actor.description}}
+    </p>
+  </ion-label>
+  </ion-item>

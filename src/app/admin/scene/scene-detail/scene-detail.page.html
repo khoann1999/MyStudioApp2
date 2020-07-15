@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button [text]="getBackButtonText()" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="scene">
+  <ion-item>
+    <ion-icon name="person-circle" color="primary"></ion-icon>
+    <ion-label class="ion-text-wrap">
+      <h2>
+        Mã số kiếp nạn:
+        {{ scene.sceneId }}
+      </h2>
+    </ion-label>
+    <ion-button (click)="deleteScene()">Xóa đạo cụ</ion-button>
+  </ion-item>
+
+
+
+  <ion-content padding >
+    <form [formGroup]="sceneForm"  (ngSubmit)="submitScene()">
+      <ion-grid>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div text-center>
+              <h1>Thông tin kiếp nạn</h1>
+            </div>
+            <div padding>
+              <h3>Tên kiếp nạn</h3>
+              <ion-item>
+                <ion-input formControlName="sceneName" name="sceneName" type="text" placeholder="Nhập tên kiếp nạn"  required></ion-input>
+              </ion-item>
+              <h3>Mô tả</h3>
+              <ion-item>
+                <ion-input formControlName="description" name="description" type="text" placeholder="Nhập miêu tả"  required></ion-input>
+              </ion-item>
+              <h3>Số lần quay</h3>
+              <ion-item>
+                <ion-input formControlName="shootTimes" name="shootTimes" type="number"  required></ion-input>
+              </ion-item>
+              <h3>Ảnh</h3>
+              <ion-item>
+                <ion-input formControlName="sceneScript" name="sceneScript" type="text" placeholder="image"  required></ion-input>
+              </ion-item>
+              <h3>Ngày bắt đầu</h3>
+              <ion-item>
+                <ion-label>MM DD YY</ion-label>
+                <ion-datetime formControlName="dateBegin" displayFormat="DD/MM/YYYY" placeholder="Select Date"></ion-datetime>
+              </ion-item>
+              <h3>Ngày kết thúc</h3>
+              <ion-item>
+                <ion-label>MM DD YY</ion-label>
+                <ion-datetime formControlName="dateEnd" displayFormat="DD/MM/YYYY" placeholder="Select Date"></ion-datetime>
+              </ion-item>
+            </div>
+            <div padding>
+              <ion-button size="large" type="submit" [disabled]="sceneForm.invalid" expand="block">submit</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-content>
+
+</ion-content>
