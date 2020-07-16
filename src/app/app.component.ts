@@ -75,6 +75,10 @@ export class AppComponent implements OnInit {
     }
   }
   private getMenu(user: User) {
+    this.appPages = [];
+    if (user == null){
+      return;
+    }
     switch (user.role) {
       case Role.Admin: {
         this.appPages = [
@@ -114,6 +118,10 @@ export class AppComponent implements OnInit {
           }];
         break;
       }
+      default: {
+        this.appPages = [];
+        break;
+     }
     }
   }
 
@@ -127,6 +135,7 @@ export class AppComponent implements OnInit {
   }
   public logOut() {
     this.loginService.logout();
+    this.getMenu(null);
     this.router.navigateByUrl('login').then();
   }
 }
