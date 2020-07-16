@@ -35,7 +35,7 @@ export class UserCreatePage implements OnInit {
     const submitUser = {
       userName: this.actorForm.get('userName').value,
       password: this.actorForm.get('password').value,
-      role: 'user'
+      role: 'User'
     };
     const actor = {
       userName: this.actorForm.get('userName').value,
