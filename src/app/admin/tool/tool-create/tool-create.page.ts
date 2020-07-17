@@ -52,7 +52,7 @@ export class ToolCreatePage implements OnInit {
       fileName: 'name.jpg',
       headers: {}
      };
-    this.fileTransfer.upload(this.fileReader(this.file), 'https://mystudiowebapi.conveyor.cloud/api/Tools/UploadImage', options)
+    this.fileTransfer.upload(this.file.dataDirectory, 'https://mystudiowebapi.conveyor.cloud/api/Tools/UploadImage', options)
     .then((data) => {
       // success
       console.log(data);
