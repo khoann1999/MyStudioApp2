@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://mystudiowebapi.conveyor.cloud/api/'
+  apiUrl: 'https://mystudiowebapi.conveyor.cloud/api/',
+  serverImage: 'https://mystudiowebapi.conveyor.cloud/'
 };
 
 /*

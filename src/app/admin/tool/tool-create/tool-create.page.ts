@@ -4,8 +4,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ToolService } from 'src/app/services/tool.service';
 import { Router } from '@angular/router';
 import { environment } from './../../../../environments/environment';
-import { File } from '@ionic-native/file/ngx';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 @Component({
   selector: 'app-tool-create',
   templateUrl: './tool-create.page.html',
@@ -14,8 +12,8 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 export class ToolCreatePage implements OnInit {
   public tool: Tool;
   public toolForm: FormGroup;
-  private fileTransfer: FileTransferObject = this.transfer.create();
-  constructor(private toolService: ToolService, private  router: Router, private transfer: FileTransfer, private file: File) { }
+  private file: File;
+  constructor(private toolService: ToolService, private  router: Router) { }
 
   ngOnInit() {
     this.toolForm = new FormGroup(
@@ -36,7 +34,7 @@ export class ToolCreatePage implements OnInit {
     const tool = {
       toolId: 0,
       toolName: this.toolForm.get('toolName').value,
-      image: null,
+      image: this.file.name,
       description: this.toolForm.get('description').value,
       quantity: this.toolForm.get('quantity').value,
       status: true
@@ -47,32 +45,10 @@ export class ToolCreatePage implements OnInit {
     error => {
     }
     );
-    const options: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: 'name.jpg',
-      headers: {}
-     };
-    this.fileTransfer.upload(this.file.dataDirectory, 'https://mystudiowebapi.conveyor.cloud/api/Tools/UploadImage', options)
-    .then((data) => {
-      // success
-      console.log(data);
-    }, (err) => {
-      // error
-      console.log(err);
-    });
+    this.toolService.uploadImage(this.file);
  }
 
   changeListener($event): void {
     this.file = $event.target.files[0];
-  }
-
-
-  private download() {
-    const url = 'http://www.example.com/file.pdf';
-    this.fileTransfer.download(url, this.file.dataDirectory + 'file.pdf').then((entry) => {
-      console.log('download complete: ' + entry.toURL());
-    }, (error) => {
-      // handle error
-    });
   }
 }

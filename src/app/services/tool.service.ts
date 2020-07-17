@@ -28,4 +28,10 @@ export class ToolService {
   public createTool(tool: Tool): Observable<Tool> {
     return this.http.post<Tool>(this.apiUrl + 'tools', tool);
   }
+  public uploadImage(file: File){
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post(this.apiUrl + 'tools' + '/UploadImage', formData, { responseType: 'text' }).subscribe(
+      error => console.error(error));
+  }
 }
