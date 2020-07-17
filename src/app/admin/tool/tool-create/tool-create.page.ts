@@ -3,6 +3,7 @@ import { Tool } from 'src/app/models/Tool';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ToolService } from 'src/app/services/tool.service';
 import { Router } from '@angular/router';
+import { environment } from './../../../../environments/environment';
 import { File } from '@ionic-native/file/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 @Component({
@@ -46,17 +47,25 @@ export class ToolCreatePage implements OnInit {
     error => {
     }
     );
-  }
+    const options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: 'name.jpg',
+      headers: {}
+     };
+    this.fileTransfer.upload(this.fileReader(this.file), 'https://mystudiowebapi.conveyor.cloud/api/Tools/UploadImage', options)
+    .then((data) => {
+      // success
+      console.log(data);
+    }, (err) => {
+      // error
+      console.log(err);
+    });
+ }
+
   changeListener($event): void {
     this.file = $event.target.files[0];
   }
-  private upload() {
-    const options: FileUploadOptions = {
-       fileKey: 'file',
-       fileName: 'name.jpg',
-       headers: {}
-      };
-    }
+
 
   private download() {
     const url = 'http://www.example.com/file.pdf';
