@@ -1,9 +1,11 @@
 import { User } from '../models/User';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from './../../environments/environment';
+
 @Injectable()
 export class LoginService {
-    private apiUrl = 'https://mystudiowebapi.conveyor.cloud/api/';
+    private apiUrl = environment.apiUrl;
     private user: User;
     constructor(private http: HttpClient) { }
 

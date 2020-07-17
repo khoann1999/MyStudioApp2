@@ -4,6 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ToolService } from 'src/app/services/tool.service';
 import { Router } from '@angular/router';
 import { File } from '@ionic-native/file/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 @Component({
   selector: 'app-tool-create',
   templateUrl: './tool-create.page.html',
@@ -12,7 +13,8 @@ import { File } from '@ionic-native/file/ngx';
 export class ToolCreatePage implements OnInit {
   public tool: Tool;
   public toolForm: FormGroup;
-  constructor(private toolService: ToolService, private  router: Router, private file: File) { }
+  private fileTransfer: FileTransferObject = this.transfer.create();
+  constructor(private toolService: ToolService, private  router: Router, private transfer: FileTransfer, private file: File) { }
 
   ngOnInit() {
     this.toolForm = new FormGroup(
@@ -44,5 +46,24 @@ export class ToolCreatePage implements OnInit {
     error => {
     }
     );
+  }
+  changeListener($event): void {
+    this.file = $event.target.files[0];
+  }
+  private upload() {
+    const options: FileUploadOptions = {
+       fileKey: 'file',
+       fileName: 'name.jpg',
+       headers: {}
+      };
+    }
+
+  private download() {
+    const url = 'http://www.example.com/file.pdf';
+    this.fileTransfer.download(url, this.file.dataDirectory + 'file.pdf').then((entry) => {
+      console.log('download complete: ' + entry.toURL());
+    }, (error) => {
+      // handle error
+    });
   }
 }

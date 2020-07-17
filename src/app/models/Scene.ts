@@ -3,7 +3,7 @@ export class Scene {
     sceneName: string;
     description: string;
     shootTimes: number;
-    sceneScript: File;
+    sceneScript: string;
     dateBegin: Date;
     dateEnd: Date;
 }
