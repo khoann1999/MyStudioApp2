@@ -1,3 +1,4 @@
+import { File } from '@ionic-native/file/ngx';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +15,7 @@ import { ToolCreatePage } from './tool-create.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
+    File,
     ToolCreatePageRoutingModule
   ],
   declarations: [ToolCreatePage]

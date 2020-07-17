@@ -1,8 +1,8 @@
-import { User } from '../../models/User';
 import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MenuController, Platform, IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class LoginPage implements OnInit {
   public userForm: FormGroup;
-  constructor(private loginService: LoginService, private  router: Router) { }
+  constructor(public menu: MenuController, private loginService: LoginService, private  router: Router,  private platform: Platform) { }
 
   ngOnInit() {
     this.userForm = new FormGroup({
@@ -37,5 +37,13 @@ export class LoginPage implements OnInit {
     if (this.loginService.getCurrentUser() != null) {
       this.router.navigateByUrl('scenes');
     }
+  }
+  ionViewWillEnter(){
+    this.menu.enable(false);
+    IonicModule.forRoot({hardwareBackButton: false});
+  }
+  ionViewDidLeave() {
+    this.menu.enable(true);
+    IonicModule.forRoot({hardwareBackButton: true});
   }
 }

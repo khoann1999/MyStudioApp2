@@ -3,7 +3,7 @@ import { Tool } from 'src/app/models/Tool';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ToolService } from 'src/app/services/tool.service';
 import { Router } from '@angular/router';
-
+import { File } from '@ionic-native/file/ngx';
 @Component({
   selector: 'app-tool-create',
   templateUrl: './tool-create.page.html',
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class ToolCreatePage implements OnInit {
   public tool: Tool;
   public toolForm: FormGroup;
-  constructor(private toolService: ToolService, private  router: Router) { }
+  constructor(private toolService: ToolService, private  router: Router, private file: File) { }
 
   ngOnInit() {
     this.toolForm = new FormGroup(
