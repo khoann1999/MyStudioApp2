@@ -2,7 +2,7 @@ import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { MenuController, Platform, IonicModule } from '@ionic/angular';
+import { MenuController, IonicModule, IonRouterOutlet } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,11 @@ import { MenuController, Platform, IonicModule } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   public userForm: FormGroup;
-  constructor(public menu: MenuController, private loginService: LoginService, private  router: Router,  private platform: Platform) { }
+  constructor(
+    public menu: MenuController,
+    private loginService: LoginService,
+    private  router: Router,
+    private routerOutlet: IonRouterOutlet) { }
 
   ngOnInit() {
     this.userForm = new FormGroup({
@@ -40,10 +44,12 @@ export class LoginPage implements OnInit {
   }
   ionViewWillEnter(){
     this.menu.enable(false);
-    IonicModule.forRoot({hardwareBackButton: false});
+    IonicModule.forRoot({ hardwareBackButton: false});
+    this.routerOutlet.swipeGesture = false;
   }
   ionViewDidLeave() {
     this.menu.enable(true);
     IonicModule.forRoot({hardwareBackButton: true});
+    this.routerOutlet.swipeGesture = true;
   }
 }
