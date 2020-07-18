@@ -28,4 +28,10 @@ export class ActorService {
   public createActor(actor: Actor): Observable<Actor>{
     return this.http.post<Actor>(this.apiUrl + 'Actors', actor);
   }
+  public uploadImage(file: File){
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post(this.apiUrl + 'Actors' + '/UploadImage', formData, { responseType: 'text' }).subscribe(
+      error => console.error(error));
+  }
 }

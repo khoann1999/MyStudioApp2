@@ -12,6 +12,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class UserDetailPage implements OnInit {
   public actor: Actor;
   public actorForm: FormGroup;
+  private file: File;
   constructor(private activatedRoute: ActivatedRoute, private actorService: ActorService, private  router: Router) { }
 
   ngOnInit() {
@@ -45,17 +46,21 @@ export class UserDetailPage implements OnInit {
     const actor = {
       userName: this.actorForm.get('userName').value,
       fullName: this.actorForm.get('fullName').value,
-      image: null,
+      image: this.file.name,
       description: this.actorForm.get('description').value,
       phoneNumber: this.actorForm.get('phoneNumber').value,
       email: this.actorForm.get('email').value,
       usernameNavigation: null
     };
     this.actorService.updateActor(actor);
+    this.actorService.uploadImage(this.file);
     this.router.navigateByUrl('/actors');
   }
   public deleteActor(){
     this.actorService.deleteActorByName(this.actor.userName);
     this.router.navigateByUrl('/actors');
+  }
+  changeListener($event): void {
+    this.file = $event.target.files[0];
   }
 }

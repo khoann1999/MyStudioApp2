@@ -12,6 +12,7 @@ import { SceneService } from 'src/app/services/Scene.service';
 export class SceneDetailPage implements OnInit {
   public scene: Scene;
   public sceneForm: FormGroup;
+  private file: File;
   constructor(private activatedRoute: ActivatedRoute, private sceneService: SceneService, private  router: Router) { }
 
   ngOnInit() {
@@ -45,7 +46,7 @@ export class SceneDetailPage implements OnInit {
       sceneName: this.sceneForm.get('sceneName').value,
       description: this.sceneForm.get('description').value,
       shootTimes: this.sceneForm.get('shootTimes').value,
-      sceneScript: null,
+      sceneScript: this.file.name,
       dateBegin: this.sceneForm.get('dateBegin').value,
       dateEnd: this.sceneForm.get('dateEnd').value
     };
@@ -55,5 +56,8 @@ export class SceneDetailPage implements OnInit {
   public deleteScene(){
     this.sceneService.deleteSceneByID(this.scene.sceneId);
     this.router.navigateByUrl('/scenes');
+  }
+  changeListener($event): void {
+    this.file = $event.target.files[0];
   }
 }

@@ -41,9 +41,9 @@
               <ion-item>
                 <ion-input formControlName="shootTimes" name="shootTimes" type="number"  required></ion-input>
               </ion-item>
-              <h3>Ảnh</h3>
+              <h3>Kịch bản</h3>
               <ion-item>
-                <ion-input formControlName="sceneScript" name="sceneScript" type="text" placeholder="image"  required></ion-input>
+                  <ion-input formControlName="sceneScript" name="sceneScript"  type="file" (change)="changeListener($event)"></ion-input>
               </ion-item>
               <h3>Ngày bắt đầu</h3>
               <ion-item>

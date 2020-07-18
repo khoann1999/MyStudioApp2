@@ -12,26 +12,26 @@ export class ToolService {
   constructor(private http: HttpClient) { }
 
   public getTools(): Observable<Tool[]> {
-    return this.http.get<Tool[]>(this.apiUrl + 'tools');
+    return this.http.get<Tool[]>(this.apiUrl + 'Tools');
   }
   public getToolByID(id: number): Observable<Tool> {
-    return this.http.get<Tool>(this.apiUrl + 'tools' + '/' + id);
+    return this.http.get<Tool>(this.apiUrl + 'Tools' + '/' + id);
   }
   public updateTool(tool: Tool) {
-    return this.http.put(this.apiUrl + 'tools' + '/' + tool.toolId, tool, { responseType: 'text' }).subscribe(
+    return this.http.put(this.apiUrl + 'Tools' + '/' + tool.toolId, tool, { responseType: 'text' }).subscribe(
       error => console.error(error));
   }
   public deleteToolByID(id: number) {
-    return this.http.delete(this.apiUrl + 'tools' + '/' + id, { responseType: 'text' }).subscribe(
+    return this.http.delete(this.apiUrl + 'Tools' + '/' + id, { responseType: 'text' }).subscribe(
       error => console.error(error));
   }
   public createTool(tool: Tool): Observable<Tool> {
-    return this.http.post<Tool>(this.apiUrl + 'tools', tool);
+    return this.http.post<Tool>(this.apiUrl + 'Tools', tool);
   }
   public uploadImage(file: File){
     const formData = new FormData();
     formData.append('file', file, file.name);
-    return this.http.post(this.apiUrl + 'tools' + '/UploadImage', formData, { responseType: 'text' }).subscribe(
+    return this.http.post(this.apiUrl + 'Tools' + '/UploadImage', formData, { responseType: 'text' }).subscribe(
       error => console.error(error));
   }
 }

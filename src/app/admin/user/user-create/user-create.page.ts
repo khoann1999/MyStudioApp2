@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class UserCreatePage implements OnInit {
   public actor: Actor;
   public actorForm: FormGroup;
+  private file: File;
+
   constructor(private actorService: ActorService, private  router: Router) { }
 
   ngOnInit() {
@@ -40,7 +42,7 @@ export class UserCreatePage implements OnInit {
     const actor = {
       userName: this.actorForm.get('userName').value,
       fullName: this.actorForm.get('fullName').value,
-      image: null,
+      image: this.file.name,
       description: this.actorForm.get('description').value,
       phoneNumber: this.actorForm.get('phoneNumber').value,
       email: this.actorForm.get('email').value,
@@ -52,5 +54,9 @@ export class UserCreatePage implements OnInit {
     error => {
     }
     );
+    this.actorService.uploadImage(this.file);
+  }
+  changeListener($event): void {
+    this.file = $event.target.files[0];
   }
 }

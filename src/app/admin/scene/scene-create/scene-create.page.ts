@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class SceneCreatePage implements OnInit {
   public scene: Scene;
   public sceneForm: FormGroup;
+  private file: File;
   constructor(private sceneService: SceneService, private  router: Router) { }
 
   ngOnInit() {
@@ -37,7 +38,7 @@ export class SceneCreatePage implements OnInit {
       sceneName: this.sceneForm.get('sceneName').value,
       description: this.sceneForm.get('description').value,
       shootTimes: this.sceneForm.get('shootTimes').value,
-      sceneScript: null,
+      sceneScript: this.file.name,
       dateBegin: this.sceneForm.get('dateBegin').value,
       dateEnd: this.sceneForm.get('dateEnd').value
     };
@@ -47,5 +48,8 @@ export class SceneCreatePage implements OnInit {
     error => {
     }
     );
+  }
+  changeListener($event): void {
+    this.file = $event.target.files[0];
   }
 }

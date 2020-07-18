@@ -32,7 +32,7 @@
               </ion-item>
               <h3>Ảnh</h3>
               <ion-item>
-                <ion-input formControlName="image" name="image" type="text" placeholder="image"  required></ion-input>
+                  <ion-input formControlName="image" name="image"  type="file" accept="image/*" (change)="changeListener($event)"></ion-input>
               </ion-item>
               <h3>Mô tả</h3>
               <ion-item>

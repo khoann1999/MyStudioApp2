@@ -13,6 +13,8 @@ export class ToolDetailPage implements OnInit {
 
   public tool: Tool;
   public toolForm: FormGroup;
+  private file: File;
+
   constructor(private activatedRoute: ActivatedRoute, private toolService: ToolService, private  router: Router) { }
 
   ngOnInit() {
@@ -46,17 +48,22 @@ export class ToolDetailPage implements OnInit {
     const tool = {
       toolId: this.toolForm.get('toolId').value,
       toolName: this.toolForm.get('toolName').value,
-      image: null,
+      image: this.file.name,
       description: this.toolForm.get('description').value,
       quantity: this.toolForm.get('quantity').value,
       status: this.toolForm.get('status').value === 'mới'
     };
-
     this.toolService.updateTool(tool);
+    this.toolService.uploadImage(this.file);
     this.router.navigateByUrl('/tools');
   }
   public deleteTool(){
     this.toolService.deleteToolByID(this.tool.toolId);
     this.router.navigateByUrl('/tools');
   }
+
+
+ changeListener($event): void {
+   this.file = $event.target.files[0];
+ }
 }

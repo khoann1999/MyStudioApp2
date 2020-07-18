@@ -1,7 +1,7 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { Actor } from 'src/app/models/Actor';
-
+import { environment } from './../../../../environments/environment';
 
 @Component({
   selector: 'app-user',
@@ -10,6 +10,7 @@ import { Actor } from 'src/app/models/Actor';
 })
 export class UserComponent implements OnInit {
   @Input() actor: Actor;
+  public imageApi = environment.serverImage + 'ActorImages/';
   constructor() { }
 
   ngOnInit() {}
