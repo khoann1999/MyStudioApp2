@@ -1,8 +1,13 @@
+import { Tool } from './../../../models/Tool';
+import { SceneActor } from './../../../models/SceneActor';
+import { Actor } from './../../../models/Actor';
 import { Component, OnInit } from '@angular/core';
 import { Scene } from 'src/app/models/Scene';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SceneService } from 'src/app/services/Scene.service';
+import { ActorService } from 'src/app/services/actor.service';
+import { ToolService } from 'src/app/services/tool.service';
 
 @Component({
   selector: 'app-scene-detail',
@@ -13,11 +18,23 @@ export class SceneDetailPage implements OnInit {
   public scene: Scene;
   public sceneForm: FormGroup;
   private file: File;
-  constructor(private activatedRoute: ActivatedRoute, private sceneService: SceneService, private  router: Router) { }
+  public actors: Actor[];
+  public selectedActorList: SceneActor[];
+  public tools: Tool[];
+  public selectedToolList: Tool[];
+  public selectedActor: string;
+  public selectedTool: string;
+  constructor(private activatedRoute: ActivatedRoute, private actorService: ActorService,
+              private toolService: ToolService,
+              private sceneService: SceneService,
+              private router: Router) { }
 
   ngOnInit() {
     const sceneId = this.activatedRoute.snapshot.paramMap.get('sceneId');
-
+    this.selectedActorList = [];
+    this.selectedToolList = [];
+    this.getActors();
+    this.getTools();
     this.sceneService.getSceneByID(parseInt(sceneId, 10)).subscribe(result => {
       this.scene = result;
       this.sceneForm = new FormGroup(
@@ -28,11 +45,13 @@ export class SceneDetailPage implements OnInit {
           sceneScript: new FormControl(this.scene.sceneScript),
           dateBegin: new FormControl(this.scene.dateBegin),
           dateEnd: new FormControl(this.scene.dateEnd),
+          selectActor: new FormControl(),
+          selectTool: new FormControl(),
         }
       );
     }, error => {
       console.error(error);
-  }
+    }
     );
   }
   getBackButtonText() {
@@ -40,7 +59,7 @@ export class SceneDetailPage implements OnInit {
     const mode = win && win.Ionic && win.Ionic.mode;
     return mode === 'ios' ? 'Inbox' : '';
   }
-  public submitScene(){
+  public submitScene() {
     const scene = {
       sceneId: this.scene.sceneId,
       sceneName: this.sceneForm.get('sceneName').value,
@@ -53,11 +72,56 @@ export class SceneDetailPage implements OnInit {
     this.sceneService.updateScene(scene);
     this.router.navigateByUrl('/scenes');
   }
-  public deleteScene(){
+  public deleteScene() {
     this.sceneService.deleteSceneByID(this.scene.sceneId);
     this.router.navigateByUrl('/scenes');
   }
   changeListener($event): void {
     this.file = $event.target.files[0];
+  }
+  public addActor(selectedActor: string) {
+    const newActor: SceneActor = {
+      sceneId: this.scene.sceneId,
+      userName: selectedActor
+    };
+    this.selectedActorList.push(newActor);
+  }
+  public addTool(selectedTool: string) {
+    const findTool = this.tools.find(tool => tool.toolId === parseInt(selectedTool, 10));
+    const newTool: Tool = {
+      toolId: findTool.toolId,
+      toolName: findTool.toolName,
+      description: findTool.description,
+      image: findTool.image,
+      quantity: 1,
+      status: findTool.status,
+    };
+    this.selectedToolList.push(newTool);
+  }
+  public incrementQty(toolId: number) {
+    const findTool = this.selectedToolList.findIndex(tool => tool.toolId === toolId);
+    if (this.selectedToolList[findTool].quantity <= 0) {
+      this.selectedToolList[findTool].quantity = 1;
+    }
+    const compareTool = this.tools.findIndex(tool => tool.toolId === toolId);
+    if (this.selectedToolList[findTool].quantity >= this.tools[compareTool].quantity) {
+      this.selectedToolList[findTool].quantity = this.tools[compareTool].quantity;
+    } else {
+      this.selectedToolList[findTool].quantity += 1;
+    }
+  }
+  public decrementQty(toolId: number) {
+    const findTool = this.selectedToolList.findIndex(tool => tool.toolId === toolId);
+    if (this.selectedToolList[findTool].quantity <= 1) {
+      this.selectedToolList[findTool].quantity = 1;
+    }
+    this.selectedToolList[findTool].quantity -= 1;
+  }
+
+  private getActors() {
+    this.actorService.getActors().subscribe(result => this.actors = result);
+  }
+  private getTools() {
+    this.toolService.getTools().subscribe(result => this.tools = result);
   }
 }

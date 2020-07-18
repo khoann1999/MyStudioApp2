@@ -55,6 +55,30 @@
                 <ion-label>MM DD YY</ion-label>
                 <ion-datetime formControlName="dateEnd" displayFormat="DD/MM/YYYY" placeholder="Select Date"></ion-datetime>
               </ion-item>
+              <h3>Diễn viên</h3>
+              <ion-select formControlName="selectActor" [(ngModel)]="selectedActor"  (ionChange)="addActor(selectedActor)" placeholder="Chọn diễn viên">
+                <ion-select-option *ngFor="let actor of actors">{{actor.userName}}</ion-select-option>
+              </ion-select>
+                <ion-list>
+                  <ion-item *ngFor="let actor of selectedActorList">
+                    <ion-label>{{actor.userName}}</ion-label>
+                    <ion-input></ion-input>
+                  </ion-item>
+                </ion-list>
+                <h3>Đạo cụ</h3>
+                <ion-select formControlName="selectTool" [(ngModel)]="selectedTool"  (ionChange)="addTool(selectedTool)" placeholder="Chọn đạo cụ">
+                  <ion-select-option *ngFor="let tool of tools" [value]="tool.toolId">{{tool.toolName}}</ion-select-option>
+                </ion-select>
+                <ion-list>
+                  <ion-list>
+                    <ion-item *ngFor="let tool of selectedToolList">
+                      <ion-label>Tên:{{tool.toolName}}</ion-label>
+                      <ion-label>Số lượng: {{tool.quantity}}</ion-label>
+                        <button type="button" size="large" (click)="incrementQty(tool.toolId)">Tăng</button>
+                        <button type="button" size="large"(click)="decrementQty(tool.toolId)">Giảm</button>
+                    </ion-item>
+                  </ion-list>
+                </ion-list>
             </div>
             <div padding>
               <ion-button size="large" type="submit" [disabled]="sceneForm.invalid" expand="block">submit</ion-button>
