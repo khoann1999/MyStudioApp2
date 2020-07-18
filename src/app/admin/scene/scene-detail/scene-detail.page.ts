@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SceneService } from 'src/app/services/Scene.service';
 import { ActorService } from 'src/app/services/actor.service';
 import { ToolService } from 'src/app/services/tool.service';
+import { SceneTool } from 'src/app/models/SceneTool';
 
 @Component({
   selector: 'app-scene-detail',
@@ -31,8 +32,11 @@ export class SceneDetailPage implements OnInit {
 
   ngOnInit() {
     const sceneId = this.activatedRoute.snapshot.paramMap.get('sceneId');
-    this.selectedActorList = [];
+
     this.selectedToolList = [];
+    this.selectedActorList = [];
+    this.getCurrentActors(sceneId);
+    this.getCurrentTools(sceneId);
     this.getActors();
     this.getTools();
     this.sceneService.getSceneByID(parseInt(sceneId, 10)).subscribe(result => {
@@ -70,6 +74,8 @@ export class SceneDetailPage implements OnInit {
       dateEnd: this.sceneForm.get('dateEnd').value
     };
     this.sceneService.updateScene(scene);
+   // this.sceneService.addActor(this.selectedActorList);
+    this.sceneService.addTool(this.selectedToolList, this.scene.sceneId);
     this.router.navigateByUrl('/scenes');
   }
   public deleteScene() {
@@ -81,6 +87,7 @@ export class SceneDetailPage implements OnInit {
   }
   public addActor(selectedActor: string) {
     const newActor: SceneActor = {
+      id: 0,
       sceneId: this.scene.sceneId,
       userName: selectedActor
     };
@@ -123,5 +130,37 @@ export class SceneDetailPage implements OnInit {
   }
   private getTools() {
     this.toolService.getTools().subscribe(result => this.tools = result);
+  }
+  private getCurrentActors(sceneId: string){
+    this.sceneService.getActorByID(parseInt(sceneId, 10)).subscribe(result => {
+      result.forEach(element => {
+      const newSelectedActor: SceneActor = {
+        id: element.id,
+        sceneId: element.sceneId,
+        userName: element.username
+      };
+      this.selectedActorList.push(newSelectedActor);
+    });
+  },
+  error => {
+      console.error(error);
+    });
+  }
+  private getCurrentTools(sceneId: string){
+    this.sceneService.getToolByID(parseInt(sceneId, 10)).subscribe(result => {
+      result.forEach(element => {
+        const newSelectedTool: Tool = {
+          toolId: element.id,
+          description: null,
+          image: null,
+          status: null,
+          toolName: element.tool.toolName,
+          quantity: element.quantity
+        };
+        this.selectedToolList.push(newSelectedTool);
+      });
+    },  error => {
+      console.error(error);
+    });
   }
 }
