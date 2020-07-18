@@ -48,6 +48,7 @@ export class SceneCreatePage implements OnInit {
     error => {
     }
     );
+    this.sceneService.uploadScript(this.file);
   }
   changeListener($event): void {
     this.file = $event.target.files[0];

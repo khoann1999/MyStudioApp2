@@ -74,8 +74,9 @@ export class SceneDetailPage implements OnInit {
       dateEnd: this.sceneForm.get('dateEnd').value
     };
     this.sceneService.updateScene(scene);
-   // this.sceneService.addActor(this.selectedActorList);
+    this.sceneService.addActor(this.selectedActorList);
     this.sceneService.addTool(this.selectedToolList, this.scene.sceneId);
+    this.sceneService.uploadScript(this.file);
     this.router.navigateByUrl('/scenes');
   }
   public deleteScene() {
