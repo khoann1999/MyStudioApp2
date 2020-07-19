@@ -25,7 +25,4 @@ export class UserSceneHistoryPage implements OnInit {
   private getScene(){
     this.sceneService.getScenes().subscribe(result => this.scenes = result);
   }
-  public createScene(){
-    this.router.navigateByUrl('/scene/create');
-  }
 }

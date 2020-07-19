@@ -64,7 +64,7 @@ const routes: Routes = [
     loadChildren: () => import('./actor/user-scene-history/user-scene-history.module').then( m => m.UserSceneHistoryPageModule)
   },
   {
-    path: 'user/scene/detail',
+    path: 'user/scene/detail/:sceneId',
     loadChildren: () => import('./actor/user-scene-detail/user-scene-detail.module').then( m => m.UserSceneDetailPageModule)
   },
 ];

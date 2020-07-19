@@ -1,9 +1,54 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>user-scene-detail</ion-title>
+    <ion-buttons>
+      <ion-back-button [text]="getBackButtonText()" defaultHref="/"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true" >
+
+
+  <ion-content padding >
+      <ion-grid>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div text-center>
+              <h1>Thông tin kiếp nạn</h1>
+            </div>
+            <div padding>
+              <h3>Tên kiếp nạn</h3>
+              <ion-item>
+                <ion-label>{{this.scene.sceneName}}</ion-label>
+              </ion-item>
+              <h3>Mô tả</h3>
+              <ion-item>
+                <p>
+                  {{this.scene.description}}
+                </p>
+              </ion-item>
+              <h3>Số lần quay</h3>
+              <ion-item>
+                <ion-label>{{this.scene.shootTimes}}</ion-label>
+              </ion-item>
+              <h3>Kịch bản</h3>
+              <ion-item>
+                <p></p>
+              </ion-item>
+              <h3>Ngày bắt đầu</h3>
+              <ion-item>
+              <ion-label>MM DD YY</ion-label>
+                  <ion-datetime  displayFormat="DD/MM/YYYY" disabled [value]="this.scene.dateBegin"></ion-datetime>
+              </ion-item>
+              <h3>Ngày kết thúc</h3>
+              <ion-item>
+                <ion-label>MM DD YY</ion-label>
+                  <ion-datetime displayFormat="DD/MM/YYYY" disabled [value]="this.scene.dateEnd"></ion-datetime>
+              </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-content>
 
 </ion-content>

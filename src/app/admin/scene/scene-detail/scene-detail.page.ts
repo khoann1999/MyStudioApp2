@@ -8,7 +8,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SceneService } from 'src/app/services/Scene.service';
 import { ActorService } from 'src/app/services/actor.service';
 import { ToolService } from 'src/app/services/tool.service';
-import { SceneTool } from 'src/app/models/SceneTool';
 
 @Component({
   selector: 'app-scene-detail',
