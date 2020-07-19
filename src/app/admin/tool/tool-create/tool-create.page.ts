@@ -22,6 +22,7 @@ export class ToolCreatePage implements OnInit {
         image: new FormControl(),
         description: new FormControl(),
         quantity: new FormControl(),
+        status: new FormControl()
       }
     );
   }
@@ -37,7 +38,7 @@ export class ToolCreatePage implements OnInit {
       image: this.file.name,
       description: this.toolForm.get('description').value,
       quantity: this.toolForm.get('quantity').value,
-      status: true
+      status: this.toolForm.get('status').value === 'mới'
     };
     this.toolService.createTool(tool).subscribe(result => {
       this.router.navigateByUrl('/tools');

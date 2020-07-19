@@ -33,6 +33,13 @@
               <ion-item>
                 <ion-input formControlName="quantity" name="quantity" type="number"  required></ion-input>
               </ion-item>
+              <h3>Trạng thái</h3>
+              <ion-item>
+                <ion-select  formControlName="status">
+                  <ion-select-option value="blonde">mới</ion-select-option>
+                  <ion-select-option value="brown">cũ</ion-select-option>
+                </ion-select>
+              </ion-item>
             </div>
             <div padding>
               <ion-button size="large" type="submit" [disabled]="toolForm.invalid" expand="block">Gửi</ion-button>
