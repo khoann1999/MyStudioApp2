@@ -1,0 +1,26 @@
+<ion-item *ngIf="scene" [routerLink]="'/scenes/' + scene.sceneId" [detail]="false">
+  <ion-label class="ion-text-wrap">
+    <h2>
+      Tên Kiếp nạn:
+      {{ scene.sceneName }}
+      <span class="date">
+        <ion-note>Số lần quay {{ scene.shootTimes }}</ion-note>
+        <ion-icon name="chevron-forward" size="small" *ngIf="isIos()"></ion-icon>
+      </span>
+    </h2>
+   
+    <h3>Thời gian bắt đầu:</h3>
+    <ion-item>
+      <ion-datetime  displayFormat="DD/MM/YYYY" disabled [value]="scene.dateBegin"></ion-datetime>
+    </ion-item>
+    <h3>Thời gian kết thúc:</h3>
+    <ion-item>
+      <ion-datetime displayFormat="DD/MM/YYYY" disabled [value]="scene.dateEnd"></ion-datetime>
+    </ion-item>
+
+    <h4>Miêu tả:</h4>
+    <p>
+      {{scene.description}}
+    </p>
+  </ion-label>
+  </ion-item>

@@ -1,3 +1,5 @@
+import { User } from './../../models/User';
+import { Role } from './../../Enum/Role.enum';
 import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -38,8 +40,14 @@ export class LoginPage implements OnInit {
     }
   }
   isLoggedIn() {
-    if (this.loginService.getCurrentUser() != null) {
+    const user: User = this.loginService.getCurrentUser();
+    if (user != null) {
+      if (user.role === Role.Admin){
       this.router.navigateByUrl('scenes');
+      }
+      if (user.role === Role.User){
+      this.router.navigateByUrl('user/scene/recently');
+      }
     }
   }
   ionViewWillEnter(){

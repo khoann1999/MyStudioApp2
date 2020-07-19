@@ -55,6 +55,18 @@ const routes: Routes = [
     path: 'scenes',
     loadChildren: () => import('./admin/scene/scene-list/scene-list.module').then( m => m.SceneListPageModule)
   },
+  {
+    path: 'user/scene/recently',
+    loadChildren: () => import('./actor/user-scene-recently/user-scene-recently.module').then( m => m.UserSceneRecentlyPageModule)
+  },
+  {
+    path: 'user/scene/history',
+    loadChildren: () => import('./actor/user-scene-history/user-scene-history.module').then( m => m.UserSceneHistoryPageModule)
+  },
+  {
+    path: 'user/scene/detail',
+    loadChildren: () => import('./actor/user-scene-detail/user-scene-detail.module').then( m => m.UserSceneDetailPageModule)
+  },
 ];
 
 @NgModule({

@@ -35,15 +35,16 @@
               </ion-item>
               <h3>Mô tả</h3>
               <ion-item>
-                <ion-input formControlName="description" name="description" type="text" placeholder="Nhập miêu tả"  required></ion-input>
+                <ion-textarea formControlName="description" name="description" type="text" placeholder="Nhập miêu tả"  required></ion-textarea>
               </ion-item>
               <h3>Số lần quay</h3>
               <ion-item>
                 <ion-input formControlName="shootTimes" name="shootTimes" type="number"  required></ion-input>
               </ion-item>
-              <h3>Kịch bản</h3>
+              <h3>Kịch bản: {{this.scene.sceneScript}}</h3>
               <ion-item>
                   <ion-input formControlName="sceneScript" name="sceneScript"  type="file" (change)="changeListener($event)"></ion-input>
+                  
               </ion-item>
               <h3>Ngày bắt đầu</h3>
               <ion-item>

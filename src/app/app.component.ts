@@ -109,18 +109,13 @@ export class AppComponent implements OnInit, AfterViewChecked   {
         this.appPages = [
           {
             title: 'Kiếp nạn sắp tới',
-            url: '',
+            url: 'user/scene/recently',
             icon: 'mail'
           },
           {
             title: 'Kiếp nạn đã qua',
-            url: '',
+            url: 'user/scene/history',
             icon: 'paper-plane'
-          },
-          {
-            title: 'Thông báo',
-            url: '',
-            icon: 'heart'
           }];
         break;
       }
