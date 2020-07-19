@@ -10,7 +10,7 @@ import { environment } from './../../../../environments/environment';
 })
 export class ToolComponent implements OnInit {
   @Input() tool: Tool;
-  public imageApi = environment.serverImage + 'ToolImages/';
+  public imageApi = environment.fileServer + 'ToolImages/';
   constructor() { }
 
   ngOnInit() {}

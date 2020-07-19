@@ -19,8 +19,8 @@ export class SceneDetailPage implements OnInit {
   public sceneForm: FormGroup;
   private file: File;
   public actors: Actor[];
-  public selectedActorList: SceneActor[];
   public tools: Tool[];
+  public selectedActorList: SceneActor[];
   public selectedToolList: Tool[];
   public selectedActor: string;
   public selectedTool: string;

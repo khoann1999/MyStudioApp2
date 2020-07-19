@@ -10,7 +10,7 @@ import { environment } from './../../../../environments/environment';
 })
 export class UserComponent implements OnInit {
   @Input() actor: Actor;
-  public imageApi = environment.serverImage + 'ActorImages/';
+  public imageApi = environment.fileServer + 'ActorImages/';
   constructor() { }
 
   ngOnInit() {}
