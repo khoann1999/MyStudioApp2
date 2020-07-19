@@ -75,7 +75,7 @@ export class UserSceneDetailPage implements OnInit {
     });
   }
   public onClickToDownload(){
-    const url = environment.fileServer;
+    const url = environment.fileServer + '/SceneScripts/';
     this.fileTransfer.download(url, this.file.dataDirectory + this.scene.sceneScript).then((entry) => {
       console.log('download complete: ' + entry.toURL());
     }, (error) => {

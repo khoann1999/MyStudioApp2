@@ -64,4 +64,11 @@ export class SceneService {
   public getToolByID(id: number): Observable<SceneTool[]> {
     return this.http.get<SceneTool[]>(this.apiUrl + 'Scenes' + '/GetPosts/' + id);
   }
+  public getCurrentScenes(userName: string): Observable<Scene[]> {
+    return this.http.get<Scene[]>(this.apiUrl + 'Scenes/GetCurrentScenes/' + userName);
+  }
+
+  public getHistoryScenes(userName: string): Observable<Scene[]> {
+    return this.http.get<Scene[]>(this.apiUrl + 'Scenes/GetHistoryScenes/' + userName);
+  }
 }
