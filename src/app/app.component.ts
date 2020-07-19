@@ -1,7 +1,7 @@
 import { Role } from './Enum/Role.enum';
 import { Router } from '@angular/router';
 import { LoginService } from './services/login.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked , ChangeDetectorRef } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -13,7 +13,7 @@ import { User } from './models/User';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewChecked   {
   public selectedIndex = 0;
   public appPages = [];
   // [
@@ -55,9 +55,14 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private loginService: LoginService,
-    public router: Router
+    public router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     this.initializeApp();
+  }
+  ngAfterViewChecked(): void {
+    this.cdr.detectChanges();
+
   }
 
   initializeApp() {
@@ -74,6 +79,7 @@ export class AppComponent implements OnInit {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
   }
+
   private getMenu(user: User) {
     this.appPages = [];
     if (user == null){

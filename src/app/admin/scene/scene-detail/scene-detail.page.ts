@@ -138,7 +138,7 @@ export class SceneDetailPage implements OnInit {
       const newSelectedActor: SceneActor = {
         id: element.id,
         sceneId: element.sceneId,
-        userName: element.username
+        userName: element.userName
       };
       this.selectedActorList.push(newSelectedActor);
     });

@@ -52,7 +52,9 @@ export class SceneService {
       id: 0,
       toolId: element.toolId,
       sceneId: currrentSceneID,
-      quantity: element.quantity
+      quantity: element.quantity,
+      tool: null,
+      scene: null
     };
     this.http.post<SceneTool>(this.apiUrl + 'Scenes/AddPost', newTool).subscribe(
       error => console.error(error));
