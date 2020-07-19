@@ -50,9 +50,9 @@
             </div>
             <h3>Trạng thái</h3>
             <ion-item>
-              <ion-select  formControlName="status">
-                <ion-select-option value="blonde">mới</ion-select-option>
-                <ion-select-option value="brown">cũ</ion-select-option>
+              <ion-select  formControlName="status" [value]="tool.status? 'mới' : 'cũ' ">
+                <ion-select-option value="mới">mới</ion-select-option>
+                <ion-select-option value="cũ">cũ</ion-select-option>
               </ion-select>
             </ion-item>
             <div padding>
