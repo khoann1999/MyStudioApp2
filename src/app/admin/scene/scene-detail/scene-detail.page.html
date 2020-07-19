@@ -48,12 +48,12 @@
               <h3>Ngày bắt đầu</h3>
               <ion-item>
                 <ion-label>MM DD YY</ion-label>
-                <ion-datetime formControlName="dateBegin" displayFormat="DD/MM/YYYY" placeholder="Select Date"></ion-datetime>
+                <ion-datetime formControlName="dateBegin" displayFormat="DD/MM/YYYY" max="2100-12-31"  placeholder="Select Date"></ion-datetime>
               </ion-item>
               <h3>Ngày kết thúc</h3>
               <ion-item>
                 <ion-label>MM DD YY</ion-label>
-                <ion-datetime formControlName="dateEnd" displayFormat="DD/MM/YYYY" placeholder="Select Date"></ion-datetime>
+                <ion-datetime formControlName="dateEnd" displayFormat="DD/MM/YYYY" max="2100-12-31"  placeholder="Select Date"></ion-datetime>
               </ion-item>
               <h3>Diễn viên</h3>
               <ion-select formControlName="selectActor" [(ngModel)]="selectedActor"  (ionChange)="addActor(selectedActor)" placeholder="Chọn diễn viên">
