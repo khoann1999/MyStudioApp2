@@ -1,10 +1,11 @@
 <ion-item *ngIf="actor" [routerLink]="'/actors/' + actor.userName" [detail]="false">
   <ion-label class="ion-text-wrap">
+    <ion-avatar slot="start">
+      <ion-img [src]="imageApi + actor.image"></ion-img>
+    </ion-avatar>
     <h2>
       Tên tài khoản:
       {{ actor.userName }}
-      <img [src]="imageApi + actor.image"
-      class="brand_logo" height="300px" width="300px">
       <span class="date">
         <ion-note>Phone number {{ actor.phoneNumber }}</ion-note>
         <ion-icon name="chevron-forward" size="small" *ngIf="isIos()"></ion-icon>

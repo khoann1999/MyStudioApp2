@@ -41,7 +41,7 @@ export class UserSceneDetailPage implements OnInit {
   getBackButtonText() {
     const win = window as any;
     const mode = win && win.Ionic && win.Ionic.mode;
-    return mode === 'ios' ? 'Inbox' : '';
+    return mode === 'ios' ? 'Back' : '';
   }
   private getCurrentActors(sceneId: string){
     this.sceneService.getActorByID(parseInt(sceneId, 10)).subscribe(result => {
