@@ -81,6 +81,7 @@ export class UserSceneDetailPage implements OnInit {
     this.fileTransfer.download(url, this.file.cacheDirectory  + this.scene.sceneScript).then((entry) => {
       console.log('download complete: ' + entry.toURL());
     }, (error) => {
+      this.scene.description = error;
       // handle error
     });
   }
