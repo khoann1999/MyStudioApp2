@@ -7,6 +7,7 @@ import { SceneActor } from 'src/app/models/SceneActor';
 import { Tool } from 'src/app/models/Tool';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-user-scene-detail',
@@ -17,7 +18,7 @@ export class UserSceneDetailPage implements OnInit {
   public scene: Scene;
   public selectedActorList: SceneActor[];
   public selectedToolList: Tool[];
-  private fileTransfer: FileTransferObject = this.transfer.create();
+  private fileTransfer: FileTransferObject;
   constructor(private activatedRoute: ActivatedRoute,
               private sceneService: SceneService,
               private transfer: FileTransfer,
@@ -75,8 +76,9 @@ export class UserSceneDetailPage implements OnInit {
     });
   }
   public onClickToDownload(){
+    this.fileTransfer = this.transfer.create();
     const url = environment.fileServer + 'SceneScripts/' + this.scene.sceneScript;
-    this.fileTransfer.download(url, this.file.syncedDataDirectory  + this.scene.sceneScript).then((entry) => {
+    this.fileTransfer.download(url, this.file.cacheDirectory  + this.scene.sceneScript).then((entry) => {
       console.log('download complete: ' + entry.toURL());
     }, (error) => {
       // handle error
